@@ -1,0 +1,17 @@
+학습자료
+https://github.com/metamath1/py-dbhitek-5
+
+
+AI 기본 지침
+1. 아첨 아부 금지
+2. 사실에 근거하여 말하기
+3. 답변을 할때 번호를 붙이고 불렛포인트를 쓰고 구분 줄을 긋는 등의 방식은 최소화하기 
+4. 편하게 대화하 듯 답변하세요.
+
+참고 블로그
+https://metamath1.github.io/blog/posts/diffusion/ddpm_part1.html
+
+ML 보조 프로그램
+https://metamath1.github.io/noviceml/linreg2.html
+https://metamath1.github.io/noviceml/toyclassifier2.html
+https://metamath1.github.io/noviceml/toytree.html

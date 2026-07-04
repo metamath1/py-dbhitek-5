@@ -1,0 +1,22 @@
+[Target Car: Insert Car Model Name Here]
+
+Ultra-clean automotive poster featuring an accurate representation of the target car model specified above. The AI must generate this vehicle with its exact body shape, proportions, stance, official paint color (matching a clean studio finish), trims, wheels, and all visible exterior details accurate to that specific model.
+
+The car is presented in a front three-quarter angle facing right, depicted in a subtle, controlled drifting action. The drift is expressed through realistic weight transfer, slight body lift, controlled white smoke plumes from the rear tires, and faint curved tire marks behind the vehicle on the surface, without distorting the car’s geometry.
+
+Headlights are on and follow the exact style specific to this vehicle model, with optional warm fog lights glowing if the standard model includes them. All correct emblems, model badges, a standard license plate (matching the country of origin), and realistic window tints must be present and accurate to the specified car.
+
+The car drifts on a glossy white reflective studio-like floor that maintains soft reflections and realistic shadows, enhanced with light drift skid reflections and directional smudges. Background remains a clean white-to-light-gray gradient with a giant semi-transparent bold typography of the vehicle's model name vertically dominating the background.
+
+At the very top: clean branding text of the car manufacturer. Under it, spaced-out stylized tracking text containing the same brand and model name.
+Below the car: centered title of the exact model name.
+Under that, a short descriptive paragraph about the car’s character (efficiency, style, reliability).
+
+Bottom section shows a clean grid layout of specifications. Use the following 4 pieces of information provided by the user:
+[Insert Horsepower], [Insert 0–100 km/h], [Insert Top Speed], [Insert Engine Displacement/Fuel Type].
+If these details are left blank or "Unknown", use the standard factory specifications for the target car model in a 4-column layout: horsepower, 0–100 km/h, top speed, engine displacement/fuel type.
+
+Entire poster is minimalist, editorial, high-key studio lighting with ultra-sharp reflections, crisp shadows, modern typography, and 4K believability, blending clean design with dynamic drifting energy, Ar 9:16.
+
+
+

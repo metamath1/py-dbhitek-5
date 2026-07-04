@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cohen's d 시각화</title>
+<style>
+  :root[data-theme="dark"] {
+    --bg: #1a1a2e;
+    --bg2: #16213e;
+    --card: #0f3460;
+    --card2: #1a2a4a;
+    --border: rgba(255,255,255,0.08);
+    --text: #e0e0f0;
+    --text2: #9090b0;
+    --text3: #5a5a7a;
+    --blue: #5ba4e8;
+    --blue-fill: rgba(91,164,232,0.15);
+    --red: #e0607e;
+    --red-fill: rgba(224,96,126,0.15);
+    --shadow: 0 4px 24px rgba(0,0,0,0.4);
+  }
+  :root[data-theme="light"] {
+    --bg: #f0f2f8;
+    --bg2: #e4e8f4;
+    --card: #ffffff;
+    --card2: #f8f9fe;
+    --border: rgba(0,0,0,0.08);
+    --text: #1a1a2e;
+    --text2: #5a5a7a;
+    --text3: #9090b0;
+    --blue: #378ADD;
+    --blue-fill: rgba(55,138,221,0.15);
+    --red: #D4537E;
+    --red-fill: rgba(212,83,126,0.15);
+    --shadow: 0 4px 24px rgba(0,0,0,0.1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  .card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 32px;
+    width: 100%;
+    max-width: 720px;
+    box-shadow: var(--shadow);
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+
+  h1 {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+  }
+  h1 span { color: var(--blue); }
+
+  .theme-btn {
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    padding: 6px 14px;
+    color: var(--text2);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .theme-btn:hover { color: var(--text); border-color: var(--blue); }
+
+  #canvas-wrap { position: relative; cursor: ew-resize; }
+  canvas { display: block; width: 100%; border-radius: 12px; }
+
+  .hint {
+    font-size: 12px;
+    color: var(--text3);
+    text-align: center;
+    margin-top: 8px;
+  }
+
+  .controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 20px;
+  }
+
+  .ctrl-row {
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 14px;
+  }
+  .ctrl-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text2);
+    margin-bottom: 8px;
+  }
+  .ctrl-label b { font-weight: 600; }
+  .ctrl-val { font-weight: 600; color: var(--text); }
+  input[type=range] {
+    width: 100%;
+    appearance: none;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--border);
+    outline: none;
+    cursor: pointer;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    appearance: none;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--blue);
+    cursor: pointer;
+    transition: transform 0.15s;
+  }
+  input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 16px;
+  }
+  .stat {
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px;
+    text-align: center;
+  }
+  .stat-label { font-size: 11px; color: var(--text2); margin-bottom: 4px; }
+  .stat-value { font-size: 22px; font-weight: 600; color: var(--text); letter-spacing: -0.5px; }
+
+  .interp-bar {
+    margin-top: 14px;
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text2);
+  }
+  .interp-label {
+    font-weight: 600;
+    color: var(--text);
+    transition: color 0.3s;
+  }
+
+  @media (max-width: 520px) {
+    .card { padding: 20px 16px; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .controls { grid-template-columns: 1fr; }
+    .stat-value { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="card">
+  <header>
+    <h1>Cohen's <span>d</span> 시각화</h1>
+    <button class="theme-btn" onclick="toggleTheme()">
+      <span id="theme-icon">☀️</span> <span id="theme-text">라이트 모드</span>
+    </button>
+  </header>
+
+  <div id="canvas-wrap">
+    <canvas id="cv" height="220"></canvas>
+  </div>
+  <div class="hint">분포를 좌우로 드래그해서 이동하세요</div>
+
+  <div class="controls">
+    <div class="ctrl-row">
+      <div class="ctrl-label">
+        <b style="color:var(--blue)">σ₁</b> 파란 분포 표준편차
+        <span class="ctrl-val" id="sd1-out">1.0</span>
+      </div>
+      <input type="range" id="sd1" min="0.3" max="3" step="0.1" value="1.0">
+    </div>
+    <div class="ctrl-row">
+      <div class="ctrl-label">
+        <b style="color:var(--red)">σ₂</b> 빨간 분포 표준편차
+        <span class="ctrl-val" id="sd2-out">1.0</span>
+      </div>
+      <input type="range" id="sd2" min="0.3" max="3" step="0.1" value="1.0">
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-label">μ₁</div><div class="stat-value" id="m1">-0.75</div></div>
+    <div class="stat"><div class="stat-label">μ₂</div><div class="stat-value" id="m2">0.75</div></div>
+    <div class="stat"><div class="stat-label">Cohen's d</div><div class="stat-value" id="dval">1.50</div></div>
+    <div class="stat"><div class="stat-label">겹침 비율</div><div class="stat-value" id="overlap">—</div></div>
+  </div>
+
+  <div class="interp-bar">
+    효과 크기: <span class="interp-label" id="interp-label">크다 (large)</span>
+  </div>
+</div>
+
+<script>
+  // theme
+  function toggleTheme() {
+    const html = document.documentElement;
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    document.getElementById('theme-icon').textContent = isDark ? '🌙' : '☀️';
+    document.getElementById('theme-text').textContent = isDark ? '다크 모드' : '라이트 모드';
+    draw();
+  }
+
+  const cv = document.getElementById('cv');
+  const ctx = cv.getContext('2d');
+  const W = 680, H = 220;
+  cv.width = W; cv.height = H;
+
+  let mu1 = -0.75, mu2 = 0.75, sd1 = 1.0, sd2 = 1.0;
+  let dragging = null, startX = 0, startMu = 0;
+
+  document.getElementById('sd1').addEventListener('input', e => {
+    sd1 = parseFloat(e.target.value);
+    document.getElementById('sd1-out').textContent = sd1.toFixed(1);
+    draw();
+  });
+  document.getElementById('sd2').addEventListener('input', e => {
+    sd2 = parseFloat(e.target.value);
+    document.getElementById('sd2-out').textContent = sd2.toFixed(1);
+    draw();
+  });
+
+  const pdf = (x, mu, sd) => Math.exp(-0.5*((x-mu)/sd)**2) / (sd * Math.sqrt(2*Math.PI));
+  const dataToX = d => (d + 7) / 14 * W;
+  const xToData = px => px / W * 14 - 7;
+
+  function scaleY(v) {
+    const top = Math.max(pdf(mu1,mu1,sd1), pdf(mu2,mu2,sd2), 0.45) * 1.2;
+    return H - 18 - v * (H - 36) / top;
+  }
+
+  function getOverlap() {
+    const steps = 1000;
+    const lo = Math.min(mu1-4*sd1, mu2-4*sd2);
+    const hi = Math.max(mu1+4*sd1, mu2+4*sd2);
+    const dx = (hi-lo)/steps;
+    let area = 0;
+    for (let i=0; i<steps; i++) {
+      const x = lo + i*dx;
+      area += Math.min(pdf(x,mu1,sd1), pdf(x,mu2,sd2)) * dx;
+    }
+    return Math.round(area*100);
+  }
+
+  function interp(d) {
+    const a = Math.abs(d);
+    if (a < 0.2) return '무시할 수 있음 (negligible)';
+    if (a < 0.5) return '작다 (small)';
+    if (a < 0.8) return '중간 (medium)';
+    return '크다 (large)';
+  }
+
+  function getCSSVar(name) {
+    return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  }
+
+  function drawDist(mu, sd, strokeColor, fillColor) {
+    const steps = 500;
+    ctx.beginPath();
+    for (let i=0; i<=steps; i++) {
+      const x = -7 + i*14/steps;
+      const px = dataToX(x), py = scaleY(pdf(x,mu,sd));
+      i===0 ? ctx.moveTo(px,py) : ctx.lineTo(px,py);
+    }
+    ctx.lineTo(dataToX(7), H-18);
+    ctx.lineTo(dataToX(-7), H-18);
+    ctx.closePath();
+    ctx.fillStyle = fillColor;
+    ctx.fill();
+    ctx.strokeStyle = strokeColor;
+    ctx.lineWidth = 2.5;
+    ctx.stroke();
+  }
+
+  function draw() {
+    ctx.clearRect(0,0,W,H);
+
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    const blue = isDark ? '#5ba4e8' : '#378ADD';
+    const red = isDark ? '#e0607e' : '#D4537E';
+    const blueFill = isDark ? 'rgba(91,164,232,0.15)' : 'rgba(55,138,221,0.15)';
+    const redFill = isDark ? 'rgba(224,96,126,0.15)' : 'rgba(212,83,126,0.15)';
+    const gridColor = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)';
+
+    // baseline
+    ctx.strokeStyle = gridColor;
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(0,H-18); ctx.lineTo(W,H-18); ctx.stroke();
+
+    drawDist(mu1, sd1, blue, blueFill);
+    drawDist(mu2, sd2, red, redFill);
+
+    // mean dashes
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([5,4]);
+    ctx.strokeStyle = blue;
+    ctx.beginPath();
+    ctx.moveTo(dataToX(mu1), scaleY(pdf(mu1,mu1,sd1)));
+    ctx.lineTo(dataToX(mu1), H-18);
+    ctx.stroke();
+    ctx.strokeStyle = red;
+    ctx.beginPath();
+    ctx.moveTo(dataToX(mu2), scaleY(pdf(mu2,mu2,sd2)));
+    ctx.lineTo(dataToX(mu2), H-18);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    const pooled = Math.sqrt((sd1*sd1 + sd2*sd2)/2);
+    const d = (mu2-mu1)/pooled;
+
+    document.getElementById('m1').textContent = mu1.toFixed(2);
+    document.getElementById('m2').textContent = mu2.toFixed(2);
+    document.getElementById('dval').textContent = Math.abs(d).toFixed(2);
+    document.getElementById('overlap').textContent = getOverlap()+'%';
+    document.getElementById('interp-label').textContent = interp(d);
+  }
+
+  const wrap = document.getElementById('canvas-wrap');
+
+  function hitDist(clientX) {
+    const rect = cv.getBoundingClientRect();
+    const d = xToData((clientX-rect.left)/rect.width*W);
+    const d1 = Math.abs(d-mu1), d2 = Math.abs(d-mu2);
+    const thr = Math.max(sd1,sd2)*1.8;
+    if (d1 < thr && d1 <= d2) return 1;
+    if (d2 < thr && d2 < d1) return 2;
+    return null;
+  }
+
+  cv.addEventListener('mousedown', e => {
+    const hit = hitDist(e.clientX);
+    if (!hit) return;
+    dragging=hit; startX=e.clientX;
+    startMu=hit===1?mu1:mu2;
+    e.preventDefault();
+  });
+  window.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    const rect = cv.getBoundingClientRect();
+    const dx = (e.clientX-startX)/rect.width*14;
+    const v = Math.max(-6, Math.min(6, startMu+dx));
+    if (dragging===1) mu1=v; else mu2=v;
+    draw();
+  });
+  window.addEventListener('mouseup', () => { dragging=null; });
+
+  cv.addEventListener('touchstart', e => {
+    const t=e.touches[0], hit=hitDist(t.clientX);
+    if (!hit) return;
+    dragging=hit; startX=t.clientX;
+    startMu=hit===1?mu1:mu2;
+    e.preventDefault();
+  }, {passive:false});
+  window.addEventListener('touchmove', e => {
+    if (!dragging) return;
+    const t=e.touches[0];
+    const rect=cv.getBoundingClientRect();
+    const dx=(t.clientX-startX)/rect.width*14;
+    const v=Math.max(-6,Math.min(6,startMu+dx));
+    if (dragging===1) mu1=v; else mu2=v;
+    draw();
+  }, {passive:false});
+  window.addEventListener('touchend', () => { dragging=null; });
+
+  draw();
+</script>
+</body>
+</html>

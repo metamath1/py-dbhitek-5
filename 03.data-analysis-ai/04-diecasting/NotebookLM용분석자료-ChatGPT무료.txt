@@ -1,0 +1,45 @@
+Die Casting 데이터 분석 요약
+
+1.  데이터 개요
+
+-   총 5,048건 (라벨 존재)
+-   정상 97.7%, 비정상 2.3% → 심한 클래스 불균형
+
+2.  핵심 변수
+
+-   High_Velocity: 가장 강력한 불량 신호 (std_diff -3.08)
+-   Cylinder_Pressure: 보조 핵심 변수 (std_diff -1.99)
+-   Rapid_Rise_Time: 보조 변수
+-   Cycle_Time: 이상치 기반 로그/이벤트 변수
+
+3.  주요 발견
+
+-   High_Velocity 하위 20%에서 불량 비율 6.56% (평균 대비 약 3배)
+-   Cylinder_Pressure 215 이하에서 불량 비율 4.73%
+-   결측 발생 시 불량 비율 약 2배 증가
+-   데이터는 “저속 + 저압” 조건에서 불량 집중
+
+4.  룰 기반 성능
+
+-   HV_low: Recall 높음 (0.56), Precision 낮음 (0.066)
+-   HV_low & CP_low: Precision 개선 (0.119), F1 최고 (0.178)
+-   OR 조건: Recall 증가 but Precision 붕괴 (~0.03)
+
+5.  해석
+
+-   단일 변수보다 조합 조건이 효과적
+-   AND 조건 → 정밀도 향상
+-   OR 조건 → 오탐 증가
+
+6.  액션 포인트
+
+-   High_Velocity 하위 구간 진입 시 조기 경보
+-   High_Velocity + Cylinder_Pressure 동시 저하 시 강경보
+-   결측 발생 시 설비/센서 점검
+-   Cycle_Time 이상치는 로그 이벤트로 분리 관리
+
+7.  결론
+
+-   단순 룰 기반으로도 의미 있는 불량 패턴 도출 가능
+-   핵심 변수 중심 접근이 효과적
+-   향후 트리 기반 모델 적용 시 성능 개선 기대

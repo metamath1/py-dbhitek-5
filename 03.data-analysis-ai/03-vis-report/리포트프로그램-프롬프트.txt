@@ -1,0 +1,32 @@
+IBM HR 데이터의 시각화 리포트를 자동으로 생성하는 스크립트를 만들어주세요.
+
+## 시나리오
+- 분기마다 ./input/ 폴더에 새 CSV 파일이 들어옵니다 (예: hr_q1.csv).
+- 윈도우 스케줄러가 스케쥴링된 스케쥴에 따라 이 스크립트를 실행합니다.
+- 새 파일이 있으면 HTML 리포트를 ./output/ 폴더에 만듭니다.
+- 이미 처리한 파일은 건너뜁니다.
+- 실행 로그를 ./output/YYYY-MM-DD-HH-MM.log 파일에 남깁니다 (메시지는 영어로).
+
+## 리포트에 포함할 시각화 6종
+모두 seaborn으로 그립니다.
+
+1. scatterplot: x=Age, y=MonthlyIncome, hue=Attrition
+2. countplot: x=Department, hue=Attrition
+3. heatmap: Age, MonthlyIncome, YearsAtCompany, DistanceFromHome 상관관계
+4. histplot: x=MonthlyIncome (bins=30, kde=True)
+5. boxplot: x=Attrition, y=MonthlyIncome
+6. barplot: x=Department, y=MonthlyIncome, hue=OverTime
+
+각 그래프는 base64로 인코딩해서 HTML에 임베드하세요. 별도 이미지 파일은 만들지 마세요.
+
+## HTML 리포트 구성
+- 제목 (파일명과 분기)
+- 데이터 요약 (행 수, Attrition 비율, 부서별 인원)
+- 시각화 6종
+
+## 주의
+- plt.show()는 사용하지 마세요 (자동 실행 스크립트).
+- 그래프 제목과 라벨은 영어로 (한글 폰트 문제 회피).
+- 결측치가 있어도 시각화는 진행하세요.
+
+파일명은 generate_report.py로 해주세요.

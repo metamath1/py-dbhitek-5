@@ -1,0 +1,243 @@
+[역할 부여]
+당신은 실리콘밸리 최고의 데이터 분석 전문 프레젠테이션 디자이너이자 전략가입니다. 
+업로드된 자료를 분석하여, 공정 관리자를 설득할 수 있는 모던하고 세련된 인포그래픽 구성안을 작성해주세요.
+
+[컨택스트]
+반드시 포함할 항목:
+- 데이터 개요
+- 비정상 비율
+- 핵심 위험 변수 3개
+- 베이스라인 혼동행렬과 최종 모델 혼동행렬 비교
+- Critical / Warning / Watch / Normal 경보 등급 설명
+- 현장 Action Plan 4개
+
+주의:
+- 소스에 없는 수치는 만들지 말 것
+- Precision, Recall, F1, 혼동행렬 수치를 정확히 유지할 것
+- 한 페이지 인포그래픽 형태로 구성할 것
+
+[디자인 및 구성 지침]
+style_guide:
+  theme_name: "Sports Science Business Infographic"
+  version: "1.0"
+  
+  visual_concept:
+    overall_vibe: "에너제틱하고 데이터 중심적인 비즈니스 플레이북"
+    design_system: "플랫 디자인 기반의 일러스트레이션과 선형 그래픽의 결합"
+    key_metaphor: "트랙과 필드(경기장), 연결된 파이프라인(흐름)"
+
+  color_palette:
+    background: "#F8F9FA" # 깨끗한 오프 화이트
+    primary_blue: "#007BFF" # 신뢰감 있는 일렉트릭 블루 (메인 경로 및 강조)
+    secondary_orange: "#FF8C00" # 활동적인 오렌지 (대조 및 주의 집중)
+    accent_green: "#28A745" # 성장을 상징하는 라임 그린
+    text_primary: "#1A1A1A" # 가독성 높은 딥 차콜
+    gradient_effect: "블루에서 퍼플, 오렌지에서 옐로우로 이어지는 부드러운 그라데이션 포인트"
+
+  typography:
+    headings:
+      font_family: "Sans-serif (Bold/Extra Bold)"
+      case: "Uppercase for titles"
+      color: "#000000"
+      alignment: "Left-aligned with visual anchors"
+    body_text:
+      font_family: "Sans-serif (Regular/Medium)"
+      line_height: "1.4"
+      color: "#333333"
+    data_points:
+      font_weight: "Bold"
+      font_size: "Large"
+      color: "#FF8C00" # 수치나 핵심 통계 강조용
+
+  layout_rules:
+    structure: "비정형적 모듈러 레이아웃 (Flow-based)"
+    spacing: "각 섹션 사이에 충분한 여백을 두어 정보 과부하 방지"
+    connectors: "섹션 간을 연결하는 굵은 유선형 라인(Path) 사용"
+    cards: "텍스트 블록은 배경색 없이 아이콘과 함께 그룹화"
+
+  graphic_elements:
+    iconography:
+      style: "Outline with subtle gradient fill (선형 아이콘 + 부분 채우기)"
+      thickness: "Medium stroke"
+    data_viz:
+      style: "심플한 막대 그래프, 과녁(Target), 기어(Gear) 등의 직관적 메타포"
+      highlight: "가장 중요한 수치(예: d=1.36) 주위에 방사형 강조선 배치"
+    background_patterns: "연한 회색의 그리드 또는 경기장 라인 패턴"
+
+  tone_and_voice:
+    language: "단정적이고 직관적인 문체 (Action-oriented)"
+    formatting: "핵심 요약 후 하단에 세부 설명 배치"
+
+
+
+===========================================================================================================
+
+
+
+[역할 부여]
+당신은 실리콘밸리 최고의 데이터 분석 전문 프레젠테이션 디자이너이자 전략가입니다. 
+업로드된 자료를 분석하여, 공정 관리자를 설득할 수 있는 모던하고 세련된 인포그래픽 구성안을 작성해주세요.
+
+[컨택스트]
+반드시 포함할 항목:
+- 데이터 개요
+- 비정상 비율
+- 핵심 위험 변수 3개
+- 베이스라인 혼동행렬과 최종 모델 혼동행렬 비교
+- Critical / Warning / Watch / Normal 경보 등급 설명
+- 현장 Action Plan 4개
+
+주의:
+- 소스에 없는 수치는 만들지 말 것
+- Precision, Recall, F1, 혼동행렬 수치를 정확히 유지할 것
+- 한 페이지 인포그래픽 형태로 구성할 것
+
+[디자인 및 구성 지침]
+slide_style_guide:
+  theme_concept:
+    name: "Engineering Sketch & Watercolor"
+    description: "청사진(Blueprint)의 기술적 느낌과 손으로 그린 일러스트의 따뜻함이 결합된 하이브리드 스타일"
+    mood: ["Professional", "Educational", "Organic", "Warm", "Structured"]
+
+  visual_elements:
+    background:
+      color: "Off-white / Light Cream (#F9F7F2)"
+      texture: "Subtle paper grain or watercolor paper texture"
+    illustration_style:
+      type: "Hand-drawn line art with watercolor shading"
+      character_design: "Friendly, minimalist robot characters with yellow safety helmets"
+      metaphor_objects: ["Blueprints", "Gears", "Rulers", "Hammers", "Safety harnesses", "Washi tape"]
+    connectors:
+      style: "Dotted or hand-drawn arrows and lines"
+      purpose: "Representing data flow or conceptual hierarchy"
+
+  color_palette:
+    primary:
+      - name: "Safety Orange"
+        hex: "#E67E22"
+        usage: "Emphasis, harness concepts, key action points"
+    secondary:
+      - name: "Blueprint Blue"
+        hex: "#3498DB"
+        usage: "Technical diagrams, context windows, background blueprints"
+    neutral:
+      - name: "Charcoal Gray"
+        hex: "#2C3E50"
+        usage: "Main text, line art outlines"
+      - name: "Soft Gray"
+        hex: "#BDC3C7"
+        usage: "Secondary details, subtle shadows"
+
+  typography:
+    headings:
+      font_family: "Modern Sans-serif (e.g., Pretendard, Apple SD Gothic Neo)"
+      weight: "Bold"
+      color: "#000000"
+    body_text:
+      font_family: "Clean Sans-serif"
+      weight: "Regular"
+      color: "#2C3E50"
+    annotations:
+      font_family: "Handwriting or Script font"
+      style: "Italicized look to mimic manual notes"
+      usage: "Quotes, side notes, labels on diagrams"
+
+  layout_principles:
+    composition: "Organic but balanced; avoid rigid grid alignment"
+    white_space: "Generous use of margins to prevent visual clutter"
+    information_hierarchy:
+      - "Bold main headline centered or top-left"
+      - "Visual metaphor in the center or following a flow"
+      - "Supporting text placed in 'sticky note' or 'callout' formats"
+
+  graphical_components:
+    infographic_types:
+      - "Concentric circles for layered concepts"
+      - "Step-ladder/Staircase for evolutionary history"
+      - "Annotated blueprints for system architecture"
+    callouts:
+      - "Hand-drawn boxes with rounded corners"
+      - "Post-it note style for quotes or key summaries"
+
+
+
+===========================================================================================================
+
+
+
+[역할 부여]
+당신은 실리콘밸리 최고의 데이터 분석 전문 프레젠테이션 디자이너이자 전략가입니다. 
+업로드된 자료를 분석하여, 공정 관리자를 설득할 수 있는 모던하고 세련된 인포그래픽 구성안을 작성해주세요.
+
+[컨택스트]
+반드시 포함할 항목:
+- 데이터 개요
+- 비정상 비율
+- 핵심 위험 변수 3개
+- 베이스라인 혼동행렬과 최종 모델 혼동행렬 비교
+- Critical / Warning / Watch / Normal 경보 등급 설명
+- 현장 Action Plan 4개
+
+주의:
+- 소스에 없는 수치는 만들지 말 것
+- Precision, Recall, F1, 혼동행렬 수치를 정확히 유지할 것
+- 한 페이지 인포그래픽 형태로 구성할 것
+
+[디자인 및 구성 지침]
+style_guide:
+  theme_name: "Kawaii Whimsical Creator"
+  version: "1.0"
+  
+  visual_concept:
+    overall_vibe: "친근하고 마법 같은 분위기의 파스텔톤 인포그래픽"
+    design_system: "라운드 처리된 모듈러 디자인 및 핸드드로잉 일러스트레이션"
+    key_metaphor: "아이디어가 현실로 변하는 마법의 공방(Magic Workshop)"
+
+  color_palette:
+    background:
+      main: "#FFF8F0" # 따뜻한 크림/연한 베이지
+      pattern: "별, 반짝임, 구름 형태의 파스텔 패턴 무늬"
+    containers:
+      primary_header: "#FF8DA1" # 선명한 핑크 (타이틀 배경)
+      secondary_header: "#7ED4AD" # 민트 그린 (보조 타이틀 배경)
+      box_fill: "#FFFFFF" # 카드 내부 흰색 배경
+    accents:
+      soft_purple: "#D4BFFF" # 연보라
+      soft_yellow: "#FFF4B2" # 연노랑
+      stroke: "#5D4037" # 짙은 브라운 (완전한 블랙 대신 부드러운 외곽선 사용)
+
+  typography:
+    headings:
+      font_family: "Rounded Sans-Serif (예: 코트라 희망체, 배달의민족 주아)"
+      style: "Bold & Bubbly"
+      color: "#FFFFFF" # 밝은 배경 위에는 흰색 텍스트
+    sub_headings:
+      font_family: "Handwriting style (예: 나눔손글씨)"
+      color: "#5D4037"
+      font_size: "Medium-Bold"
+    body_text:
+      font_family: "Clean Sans-Serif"
+      line_height: "1.3"
+      color: "#4E342E"
+      alignment: "Center or Left"
+
+  layout_rules:
+    structure: "2x4 또는 3x3 그리드 기반의 카드 레이아웃"
+    card_style:
+      border_radius: "25px"
+      border_thickness: "2px"
+      border_color: "#5D4037"
+      shadow: "없음 (플랫한 스타일)"
+    spacing: "모듈 간의 경계를 뚜렷하게 하고, 상단에 큰 제목 공간 확보"
+
+  graphic_elements:
+    illustration_style: "두꺼운 외곽선의 2D 캐릭터 (Chibi 스타일)"
+    decorations:
+      - "반짝이는 별(Sparkles)과 음표 기호"
+      - "점선(Dashed lines)을 이용한 화살표 및 구분선"
+      - "마스킹 테이프나 메모지 느낌의 헤더 처리"
+    icons: "손으로 그린 듯한 아날로그 도구(연필, 돋보기, 책, 필름) 메타포"
+
+  tone_and_voice:
+    language: "쉽고 친절하며 격려하는 어조 (Magic, Transform, Explore 등 단어 사용)"
+    formatting: "한 문장으로 된 핵심 제목 + 2~3줄의 간결한 설명"
