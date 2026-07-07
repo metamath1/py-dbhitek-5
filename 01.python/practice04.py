@@ -45,14 +45,16 @@ def calculate_yield(wafer_count, chips_per_wafer, defective_chips):
 
     ###########################################################################
     # 여기에 코드 작성
+    total_chips = wafer_count * chips_per_wafer
+    good_chips = total_chips - defective_chips
+    yield_rate = good_chips / total_chips * 100
 
-
-
+    return yield_rate
     ###########################################################################
 
     # 아래 return 0은 코드가 실행되도록 넣어둔 임시값입니다.
     # 과제 수행 시 실제 계산 결과를 return 하도록 수정하세요.
-    return 0
+    # return 0
 
 
 print("[실시간 웨이퍼 수율 계산 프로그램]")
